@@ -24,26 +24,26 @@ const categories = [
 ]
 
 // Dummy product data
-const products = {
-  "Formal Shirt": [
-    { id: 1, name: "White Dress Shirt", price: 29.99, image: "/placeholder.svg?height=300&width=300" },
-    { id: 2, name: "Blue Dress Shirt", price: 34.99, image: "/placeholder.svg?height=300&width=300" },
-  ],
-  "Casual Shirt": [
-    { id: 3, name: "Basic Crew Neck", price: 14.99, image: "/placeholder.svg?height=300&width=300" },
-    { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
-  ],
-  "Polo": [
-    { id: 1, name: "Stripe Polo", price: 150, image: "/placeholder.svg?height=300&width=300" },
-    { id: 2, name: "Plain polo", price: 145, image: "/placeholder.svg?height=300&width=300" },
-    { id: 2, name: "Coton polo", price: 215, image: "/placeholder.svg?height=300&width=300" },
-  ],
-  "Oversize": [
-    { id: 3, name: "Printer Coton Oversize", price: 240, image: "/placeholder.svg?height=300&width=300" },
-    { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
-  ],
-  // Add more products for other categories as needed
-}
+// const products = {
+//   "Formal Shirt": [
+//     { id: 1, name: "White Dress Shirt", price: 29.99, image: "/placeholder.svg?height=300&width=300" },
+//     { id: 2, name: "Blue Dress Shirt", price: 34.99, image: "/placeholder.svg?height=300&width=300" },
+//   ],
+//   "Casual Shirt": [
+//     { id: 3, name: "Basic Crew Neck", price: 14.99, image: "/placeholder.svg?height=300&width=300" },
+//     { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
+//   ],
+//   "Polo": [
+//     { id: 1, name: "Stripe Polo", price: 150, image: "/placeholder.svg?height=300&width=300" },
+//     { id: 2, name: "Plain polo", price: 145, image: "/placeholder.svg?height=300&width=300" },
+//     { id: 2, name: "Coton polo", price: 215, image: "/placeholder.svg?height=300&width=300" },
+//   ],
+//   "Oversize": [
+//     { id: 3, name: "Printer Coton Oversize", price: 240, image: "/placeholder.svg?height=300&width=300" },
+//     { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
+//   ],
+//   // Add more products for other categories as needed
+// }
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
