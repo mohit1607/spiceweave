@@ -5,7 +5,7 @@ import CategoryMenu from "./components/CategoryMenu"
 import ProductCard from "./components/ProductCard"
 import { type SanityDocument } from "next-sanity";
 
-import { client } from "@/sanity/client";
+import { client } from "../Sanity/client";
 
 const POSTS_QUERY = `*[_type == 'product'][0..9]{_id, name, price, image{asset->{url}}}`;
 
