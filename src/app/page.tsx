@@ -1,101 +1,102 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useEffect, useState } from "react"
+import CategoryMenu from "./components/CategoryMenu"
+import ProductCard from "./components/ProductCard"
+import { type SanityDocument } from "next-sanity";
+
+import { client } from "@/sanity/client";
+
+const POSTS_QUERY = `*[_type == 'product'][0..9]{_id, name, price, image{asset->{url}}}`;
+
+// const options = { next: { revalidate: 30 } };
+
+const categories = [
+  { name: "Shirts", items: ["Formal Shirt", "Casual Shirt", "Half Shirt"] },
+  { name: "T-Shirts", items: ["Polo", "Oversize"] },
+  { name: "Jeans", items: ["Slim Fit", "Regular Fit", "Straight Fit"] },
+  { name: "Lowers", items: ["NS lycra", "NS terry", "Joggers", "Baggy"] },
+  { name: "Shorts", items: ["Gym Shorts", "Coton Shorts", "NS shorts"] },
+  { name: "Cargo", items: ["Cargo Pants", "NS Cargo"] },
+  { name: "Hoodies", items: ["Pullover Hoodie", "Zip Hoodie", "Sweat shirt"] },
+  { name: "Pants", items: ["Formal Pants", "Trousers", "Coton Pants"] },
+  { name: "Premium", items: ["Polo", "Jeans", "shirt", "Pant", "Tshirt"] },
+]
+
+// Dummy product data
+const products = {
+  "Formal Shirt": [
+    { id: 1, name: "White Dress Shirt", price: 29.99, image: "/placeholder.svg?height=300&width=300" },
+    { id: 2, name: "Blue Dress Shirt", price: 34.99, image: "/placeholder.svg?height=300&width=300" },
+  ],
+  "Casual Shirt": [
+    { id: 3, name: "Basic Crew Neck", price: 14.99, image: "/placeholder.svg?height=300&width=300" },
+    { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
+  ],
+  "Polo": [
+    { id: 1, name: "Stripe Polo", price: 150, image: "/placeholder.svg?height=300&width=300" },
+    { id: 2, name: "Plain polo", price: 145, image: "/placeholder.svg?height=300&width=300" },
+    { id: 2, name: "Coton polo", price: 215, image: "/placeholder.svg?height=300&width=300" },
+  ],
+  "Oversize": [
+    { id: 3, name: "Printer Coton Oversize", price: 240, image: "/placeholder.svg?height=300&width=300" },
+    { id: 4, name: "Graphic Crew Neck", price: 19.99, image: "/placeholder.svg?height=300&width=300" },
+  ],
+  // Add more products for other categories as needed
+}
+
+function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedItem, setSelectedItem] = useState<string | null>(null)
+  const [productList, setProductList] = useState<null | [SanityDocument]>(null);
+
+  const handleSelectItem = (category: string, item: string) => {
+    setSelectedCategory(category)
+    setSelectedItem(item)
+  }
+
+  useEffect(() => {
+    const productsData = async () => {
+      client.fetch(POSTS_QUERY).then(result => {
+        console.log(result)
+        setProductList(result)
+        return result
+      });
+      return [];
+    }
+    console.log(productsData())
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex flex-col md:flex-row gap-8 overflow-hidden">
+      <div className="md:w-1/3">
+        <h2 className="text-2xl font-bold mb-4">Categories</h2>
+        <CategoryMenu categories={categories} onSelectItem={handleSelectItem} />
+      </div>
+      <div className="flex-1 flex-flex-col gap-8">
+        <h2 className="text-2xl font-bold mb-4">
+          {selectedCategory ? `${selectedCategory}: ${selectedItem}` : "Select a category"}
+        </h2>
+        <div className="gap-4 flex flex-wrap overflow-auto justify-center">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* {selectedItem && products[selectedItem] ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {products[selectedItem].map((product) => (
+            <ProductCard key={product.id} name={product.name} price={product.price} image={product.image} />
+            ))}
+            </div>
+            ) : (
+              <p>Select a specific item to view products.</p>
+              )} */}
+          {
+            productList?.map(product =>
+              <ProductCard key={product._id} name={product.name} price={product.price} image={product.image.asset.url} />
+            )
+          }
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;

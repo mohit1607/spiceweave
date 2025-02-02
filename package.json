@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/cli": "^3.72.1",
+    "@sanity/image-url": "^1.1.0",
+    "lucide-react": "^0.474.0",
+    "next": "15.1.6",
+    "next-sanity": "^9.8.47",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "react-medium-image-zoom": "^5.2.13"
   },
   "devDependencies": {
     "typescript": "^5",
