@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import CategoryMenu from "./components/CategoryMenu";
 import ProductCard from "./components/ProductCard";
 import { type SanityDocument } from "next-sanity";
 import { client } from "../Sanity/client";
