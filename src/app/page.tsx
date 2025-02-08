@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="flex flex-col md:flex-row gap-8 overflow-hidden">
       <div className="flex-1 flex-flex-col gap-8">
-        <div className="gap-4 flex flex-wrap overflow-auto justify-center pb-12">
+        <div className="grid-container">
           {productList?.map((product) => (
             <ProductCard key={product._id} name={product.name} price={product.price} image={product.image.asset.url} />
           ))}

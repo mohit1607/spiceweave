@@ -1,6 +1,8 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
+import Image from "next/image"
 import type React from "react"
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,7 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="bg-[#34069e] text-white p-4">
+        <header className="text-white p-4 flex gap-4 items-center justify-center">
+          <Image
+            width='60'
+            height='60'
+            src={'/sw100.png'}
+          />
+
           <h1 className="text-2xl font-bold text-[#d65b27]">Spice Weave Garments</h1>
         </header>
         <main className="container mx-auto p-4">{children}</main>
