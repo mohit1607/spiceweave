@@ -6,7 +6,7 @@ import { type SanityDocument } from "next-sanity";
 import { client } from "../Sanity/client";
 import { FaWhatsapp } from "react-icons/fa";
 
-const POSTS_QUERY = `*[_type == 'product'][0..9]{_id, name, price, image{asset->{url}}}`;
+const POSTS_QUERY = `*[_type == 'product'][0..100]{_id, name, price, image{asset->{url}}}`;
 
 const Home = () => {
   const [productList, setProductList] = useState<SanityDocument[] | null>(null);
