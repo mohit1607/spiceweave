@@ -21,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <header className="text-white p-4 flex gap-4 items-center justify-center">
           <Image
+          alt="brandLogo"
             width='60'
             height='60'
             src={'/sw100.png'}
