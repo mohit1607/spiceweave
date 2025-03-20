@@ -6,7 +6,7 @@ import { type SanityDocument } from "next-sanity";
 import { client } from "../Sanity/client";
 import { FaWhatsapp } from "react-icons/fa";
 
-const POSTS_QUERY = `*[_type == 'product'][0..100]{_id, name, price, image{asset->{url}}}`;
+const POSTS_QUERY = `*[_type == 'product'][0..100]{_id, name, price, Medium, Large, XL, XXL, XXXL, image{asset->{url}}}`;
 
 const Home = () => {
   const [productList, setProductList] = useState<SanityDocument[] | null>(null);
@@ -26,7 +26,17 @@ const Home = () => {
       <div className="flex-1 flex-flex-col gap-8">
         <div className="grid-container">
           {productList?.map((product) => (
-            <ProductCard key={product._id} name={product.name} price={product.price} image={product.image.asset.url} />
+            <ProductCard
+              key={product._id}
+              name={product.name}
+              price={product.price}
+              image={product.image.asset.url}
+              medium={product.Medium}
+              large={product.Large}
+              xl={product.XL}
+              xxl={product.XXL}
+              xxxl={product.XXXL}
+            />
           ))}
         </div>
       </div>
